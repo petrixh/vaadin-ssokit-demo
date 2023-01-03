@@ -1,0 +1,16 @@
+The Keycloak instance doesn't used named volumes, hence doing a compose up/down will
+make a new filesystem image for the container data.
+
+Use:
+
+docker stop keycloak-keycloak-1
+
+docker start keycloak-keycloak-1
+
+to find the container name use:
+
+docker container list -all
+
+
+
+

@@ -1,3 +1,21 @@
+# Setup
+There are docker compose files under the `/docker` folder. 
+
+`docker-compose up -d`
+
+After setting up the keycloak docker image use: 
+
+`docker stop keycloak-keycloak-1`
+
+`docker start keycloak-keycloak-1`
+
+to start and stop the container. compose down/up will eventually wipe your data as the container is destroyed and the volumes are not named. 
+
+(or whatever the container is called, check with `docker ps` or `docker container list -all` tab autocomplete should work at least if running docker as non-root)
+
+
+
+
 # SSO Kit Test 2
 
 This project can be used as a starting point to create your own Vaadin application with Spring Boot.
