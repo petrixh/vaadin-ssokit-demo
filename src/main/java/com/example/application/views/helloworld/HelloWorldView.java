@@ -13,7 +13,7 @@ import com.vaadin.flow.router.RouteAlias;
 
 import javax.annotation.security.RolesAllowed;
 
-@RolesAllowed({"testuser"})
+@RolesAllowed({"test-role"})
 @PageTitle("Hello World")
 @Route(value = "hello", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)

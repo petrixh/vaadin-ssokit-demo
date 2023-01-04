@@ -1,12 +1,15 @@
 package com.example.application.views.about;
 
 import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.component.radiobutton.dataview.RadioButtonGroupListDataView;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
@@ -19,12 +22,14 @@ import org.springframework.security.oauth2.core.converter.ClaimConversionService
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 import javax.annotation.security.PermitAll;
+import javax.swing.JRadioButton;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @PermitAll
 @PageTitle("About")
@@ -47,12 +52,14 @@ public class AboutView extends VerticalLayout {
         getStyle().set("text-align", "center");
 
 
+
+
         if(authenticationContext.getAuthenticatedUser().isPresent()) {
             OidcUser oidcUser = authenticationContext.getAuthenticatedUser().get();
             System.out.println("Dumping user info: ");
             System.out.println(oidcUser);
 
-            boolean formatted = false;
+            boolean formatted = true;
 
             if(formatted) {
                 System.out.println("Dumping user info formatted: ");
