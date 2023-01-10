@@ -4,10 +4,12 @@ package com.example.application.views;
 import com.example.application.components.appnav.AppNav;
 import com.example.application.components.appnav.AppNavItem;
 import com.example.application.views.about.AboutView;
+import com.example.application.views.helloworld.AdminProfile;
 import com.example.application.views.helloworld.HelloProfile;
 import com.example.application.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
@@ -15,15 +17,18 @@ import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import com.vaadin.sso.starter.AuthenticationContext;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
 public class MainLayout extends AppLayout {
 
+    private final AuthenticationContext authenticationContext;
     private H2 viewTitle;
 
-    public MainLayout() {
+    public MainLayout(AuthenticationContext authenticationContext) {
+        this.authenticationContext = authenticationContext;
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -47,6 +52,8 @@ public class MainLayout extends AppLayout {
         Scroller scroller = new Scroller(createNavigation());
 
         addToDrawer(header, scroller, createFooter());
+
+
     }
 
     private AppNav createNavigation() {
@@ -56,6 +63,7 @@ public class MainLayout extends AppLayout {
 
         nav.addItem(new AppNavItem("Hello World", HelloWorldView.class, "la la-globe"));
         nav.addItem(new AppNavItem("Hello Profile Role", HelloProfile.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Hello Admin Role Profile", AdminProfile.class, "la la-globe"));
         nav.addItem(new AppNavItem("About", AboutView.class, "la la-file"));
 
         return nav;
@@ -63,6 +71,10 @@ public class MainLayout extends AppLayout {
 
     private Footer createFooter() {
         Footer layout = new Footer();
+
+        if (authenticationContext.getAuthenticatedUser().isPresent()) {
+            layout.add(new Button("Logout", e -> authenticationContext.logout()));
+        }
 
         return layout;
     }
