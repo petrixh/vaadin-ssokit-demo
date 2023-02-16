@@ -16,8 +16,9 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-import com.vaadin.sso.starter.AuthenticationContext;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -72,8 +73,10 @@ public class MainLayout extends AppLayout {
     private Footer createFooter() {
         Footer layout = new Footer();
 
-        if (authenticationContext.getAuthenticatedUser().isPresent()) {
-            layout.add(new Button("Logout", e -> authenticationContext.logout()));
+        if (authenticationContext.getAuthenticatedUser(OidcUser.class).isPresent()) {
+            Button logout = new Button("Logout", e -> authenticationContext.logout());
+            logout.setId("logout");
+            layout.add(logout);
         }
 
         return layout;

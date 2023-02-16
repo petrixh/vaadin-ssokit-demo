@@ -9,7 +9,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.sso.starter.AuthenticationContext;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.AddressStandardClaim;
@@ -38,7 +38,7 @@ public class AdminProfile extends VerticalLayout {
     public AdminProfile(AuthenticationContext authenticationContext) throws InvocationTargetException, IllegalAccessException {
         add(new H1("This is for users with the admin role"));
         setWidthFull();
-        Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser();
+        Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser(OidcUser.class);
 
         if (authenticatedUser.isPresent()) {
             buildProfileUi(authenticatedUser.get());

@@ -11,7 +11,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.sso.starter.AuthenticationContext;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 import javax.annotation.security.RolesAllowed;
@@ -32,7 +32,7 @@ public class HelloProfile extends VerticalLayout {
         add(new H1("This is for users with test-role only"));
 
         setWidthFull();
-        Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser();
+        Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser(OidcUser.class);
 
         if (authenticatedUser.isPresent()) {
             buildProfileUi(authenticatedUser.get());

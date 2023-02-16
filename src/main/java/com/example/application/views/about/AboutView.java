@@ -1,35 +1,22 @@
 package com.example.application.views.about;
 
 import com.example.application.views.MainLayout;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.radiobutton.dataview.RadioButtonGroupListDataView;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteAlias;
-import com.vaadin.sso.starter.AuthenticationContext;
-import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.GenericConverter;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.oauth2.core.converter.ClaimConversionService;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 import javax.annotation.security.PermitAll;
-import javax.swing.JRadioButton;
 import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Stream;
 
 @PermitAll
 @PageTitle("About")
@@ -54,8 +41,8 @@ public class AboutView extends VerticalLayout {
 
 
 
-        if(authenticationContext.getAuthenticatedUser().isPresent()) {
-            OidcUser oidcUser = authenticationContext.getAuthenticatedUser().get();
+        if(authenticationContext.getAuthenticatedUser(OidcUser.class).isPresent()) {
+            OidcUser oidcUser = authenticationContext.getAuthenticatedUser(OidcUser.class).get();
             System.out.println("Dumping user info: ");
             System.out.println(oidcUser);
 
@@ -63,8 +50,8 @@ public class AboutView extends VerticalLayout {
 
             if(formatted) {
                 System.out.println("Dumping user info formatted: ");
-                add(new Span("Current auth User: " + authenticationContext.getAuthenticatedUser().get().getName()));
-                Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser();
+                add(new Span("Current auth User: " + authenticationContext.getAuthenticatedUser(OidcUser.class).get().getName()));
+                Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser(OidcUser.class);
                 Map<String, Object> claims = authenticatedUser.get().getClaims();
                 StringBuilder sb = new StringBuilder();
                 sb.append("------ Claims: \n ");
