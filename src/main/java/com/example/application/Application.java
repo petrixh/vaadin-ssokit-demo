@@ -36,6 +36,7 @@ public class Application implements AppShellConfigurator {
     @Bean
     public VaadinOidcUserService.VaadinSsoAuthoritiesMapper getVaadinSsoAuthoritiesMapper() {
         return new VaadinSsoKitKeycloakDefaultRealmAuthoritiesMapper();
+        //return new DbRoleMapper(); 
     }
 
 }
