@@ -1,0 +1,36 @@
+services:
+  app:
+    #image: eclipse-temurin:17-jdk
+    build: .
+    user: ubuntu
+    volumes:
+      #- .:/workspace
+      - .:/workspace:cached #Potential perf improvement but host changes are not syncronous
+      # (Optional) Mount the Docker socket if you need to run docker commands inside the container:
+      - /var/run/docker.sock:/var/run/docker.sock
+    #command: bash
+    command: sleep infinity
+    # This is the primary container where you'll do your development work.
+    
+  # postgres:
+    # image: postgres:latest
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: mydb
+  #   ports:
+  #     - "5432:5432"
+    
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0
+    ports:
+      - "8081:8080"
+      - "8787:8787"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      - ./docker/keycloak_data:/opt/keycloak/data/h2
+    command:
+      - start-dev
