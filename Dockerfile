@@ -12,6 +12,9 @@ RUN apt-get update && \
 # (Optional) Add the ubuntu user to the docker group so that it can access the Docker socket
 RUN sudo groupadd docker || true && sudo usermod -aG docker ubuntu
 
+RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu && \
+    chmod 0440 /etc/sudoers.d/ubuntu
+
 # Set as default user
 USER ubuntu
 WORKDIR /home/ubuntu
