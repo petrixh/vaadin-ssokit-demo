@@ -14,7 +14,7 @@
     "REPO_GIT_URL": "https://github.com/petrixh/vaadin-ssokit-demo.git"
   },
   "postCreateCommand": "echo 'Container is ready!'",
-  "postStartCommand": "if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi; && socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080 &"
+  "postStartCommand": "if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi; socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080 &"
   
   
 }
