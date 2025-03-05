@@ -15,9 +15,13 @@ RUN sudo groupadd docker || true && sudo usermod -aG docker ubuntu
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu && \
     chmod 0440 /etc/sudoers.d/ubuntu
 
+RUN mkdir /workspace
+RUN chown ubuntu:ubuntu /workspace
+
 # Set as default user
 USER ubuntu
-WORKDIR /home/ubuntu
+#WORKDIR /home/ubuntu
+WORKDIR /workspace
 
 ENV DEBIAN_FRONTEND teletype
 
