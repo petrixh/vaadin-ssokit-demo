@@ -11,7 +11,7 @@
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
   "remoteEnv": {
-    "REPO_GIT_URL": "https://github.com/petrixh/25-4-testbench.git"
+    "REPO_GIT_URL": "https://github.com/petrixh/vaadin-ssokit-demo.git"
   },
   "postCreateCommand": "echo 'Container is ready!'",
   "postStartCommand": "if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi"
