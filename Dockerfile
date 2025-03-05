@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get install -y \
-    sudo git docker.io && \
+    sudo git nano htop docker.io && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # (Optional) Add the ubuntu user to the docker group so that it can access the Docker socket
