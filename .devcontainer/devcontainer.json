@@ -11,10 +11,16 @@
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
   "remoteEnv": {
-    "REPO_GIT_URL": "https://github.com/petrixh/vaadin-ssokit-demo.git"
+    "REPO_GIT_URL": "-b upgrade-and-dev-containers https://github.com/petrixh/vaadin-ssokit-demo.git",
+    "PRO_KEY": "${localEnv:MY_PRO_KEY}",
+    "USER_KEY": "${localEnv:MY_USER_KEY}"
   },
-  "postCreateCommand": "echo 'Container is ready!'",
-  "postStartCommand": "if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi; socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080 &"
+  "postCreateCommand": "if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi; /workspace/setProKey.sh",
+  "postStartCommand": "socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080",
+  /*"postStartCommand": [
+    "/bin/bash if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi;",
+    "/bin/bash socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080 &"
+  ]*/
   
   
 }
