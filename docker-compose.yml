@@ -9,6 +9,6 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     volumes:
-      - ./docker/keycloak_data:/opt/keycloak/data/h2
+      - ./docker/keycloak_data:/opt/keycloak/data
     command:
       - start-dev
