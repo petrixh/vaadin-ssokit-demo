@@ -8,7 +8,7 @@ services:
       - .:/workspace:cached #Potential perf improvement but host changes are not syncronous
       - ${HOME}/.vaadin:/dot-vaadin:ro # to pass configs etc.. 
       # Optional, need to copy the host m2 folder manually prior to launching the devcontainer if desired, otherwise will simply work as a cache betweeen container recreates..
-      - ./m2-cache:/home/ubuntu/.m2 # cache maven deps for faster builds... 
+      - ./m2-cache:/home/ubuntu/.m2:delegated # cache maven deps for faster builds... 
       # (Optional) Mount the Docker socket if you need to run docker commands inside the container:
       - /var/run/docker.sock:/var/run/docker.sock
     #command: bash
