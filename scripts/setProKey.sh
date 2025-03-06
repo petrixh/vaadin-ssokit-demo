@@ -16,7 +16,7 @@ if [ -f "$PROKEY_FILE" ]; then
 fi
 
 # Prompt the user for their proKey
-echo "Enter your proKey:"
+echo "Enter your proKey as given in a proKey file (for instance less ~/.vaadin/proKey ) Ctrl+c to cancel:"
 read proKeyInput
 
 # Write the input to the proKey file (this will create or overwrite the file)
