@@ -5,7 +5,7 @@ services:
     user: ubuntu
     volumes:
       #- .:/workspace
-      #- .:/workspace:cached #Potential perf improvement but host changes are not syncronous
+      - .:/workspace:cached #Potential perf improvement but host changes are not syncronous
       # (Optional) Mount the Docker socket if you need to run docker commands inside the container:
       - /var/run/docker.sock:/var/run/docker.sock
     #command: bash
