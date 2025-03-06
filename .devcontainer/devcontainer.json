@@ -1,5 +1,5 @@
 {
-  "name": "Java 17 Dev Container",
+  "name": "Vaadin SSO Kit Demo - Java 17 Dev Container",
   "dockerComposeFile": ["../docker-compose.yml", "../docker-compose-devcontainer.yml"],
   "service": "app",
   "workspaceFolder": "/workspace",
@@ -10,18 +10,6 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
-  "remoteEnv": {
-    "REPO_GIT_URL": "-b upgrade-and-dev-containers https://github.com/petrixh/vaadin-ssokit-demo.git"
-    //,"PRO_KEY": "${localEnv:MY_PRO_KEY}",
-    //,"USER_KEY": "${localEnv:MY_USER_KEY}"
-  },
-  //"postCreateCommand": "if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi; /workspace/setProKey.sh",
-  "postCreateCommand": "find /workspace/docker/keycloak_data -type f ! -name '*lock.db' -exec git update-index --assume-unchanged {} \\; ; /workspace/scripts/copyDotVaadin.sh; echo '\n\n********\nrun /workspace/scipts/tunnelKeyCloak.sh to start tunneling localhost8081 to the KC container\n********';"
-  //"postStartCommand": "socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080",
-  /*"postStartCommand": [
-    "/bin/bash if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi;",
-    "/bin/bash socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080 &"
-  ]*/
-  
+  "postCreateCommand": "/workspace/scripts/postCreateScript.sh"
   
 }
