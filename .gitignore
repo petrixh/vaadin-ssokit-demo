@@ -22,3 +22,4 @@ webpack.generated.js
 index.html
 
 docker/keycloak_data/
+m2-cache/
