@@ -1,4 +1,6 @@
 #!/bin/sh
+# A script to set the ProKey from the user's input in the $HOME/.vaadin/proKey file easily. 
+
 # Define the .vaadin directory path in the user's home directory
 VAADIN_DIR="$HOME/.vaadin"
 
