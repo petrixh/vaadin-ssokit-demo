@@ -1,5 +1,0 @@
-{
-  "extends": "./devcontainer.json",
-  "workspaceMount": "source=/home/deb/vaadin-ssokit-demo,target=/workspace,type=bind",
-  "workspaceFolder": "/workspace"
-}
