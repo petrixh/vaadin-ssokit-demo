@@ -6,6 +6,7 @@ services:
     volumes:
       #- .:/workspace
       - .:/workspace:cached #Potential perf improvement but host changes are not syncronous
+      - ${HOME}/.vaadin:/dot-vaadin:ro # to pass configs etc.. 
       # (Optional) Mount the Docker socket if you need to run docker commands inside the container:
       - /var/run/docker.sock:/var/run/docker.sock
     #command: bash

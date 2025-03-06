@@ -16,6 +16,7 @@
     //,"USER_KEY": "${localEnv:MY_USER_KEY}"
   },
   //"postCreateCommand": "if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi; /workspace/setProKey.sh",
+  "postCreateCommand": "find /workspace/docker/keycloak_data -type f ! -name '*lock.db' -exec git update-index --assume-unchanged {} \\; ; /workspace/copyDotVaadin.sh; echo 'run ./workspace/tunnelKeyCloak.sh to start tunneling localhost8081 to the KC container';"
   //"postStartCommand": "socat TCP-LISTEN:8081,fork TCP:sso-kit-demo-keycloak:8080",
   /*"postStartCommand": [
     "/bin/bash if [ ! -d /workspace/.git ]; then git clone $REPO_GIT_URL /workspace; fi;",

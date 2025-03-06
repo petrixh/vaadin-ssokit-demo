@@ -20,3 +20,5 @@ drivers/
 error-screenshots/
 webpack.generated.js
 index.html
+
+docker/keycloak_data/
