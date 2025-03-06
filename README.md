@@ -1,3 +1,79 @@
+# Cloning and running the project
+
+The demo application requires a Keycloak instance to be running on localhost:8081.
+
+The following is to run the app on the host (see below for other options) 
+
+The easiest way with Docker is to run the included compose file which will also use pre-existing keycloak configurations: 
+
+```
+docker compose up -d
+```
+
+Then you can build and run (Vaadin license required) the project with: 
+
+```
+./mvnw clean packaga spring-boot:run -DskipTests
+```
+
+## Running in a dev container with VS Code
+
+Dev Containers require docker and docker compose to be installed in order to run. 
+
+### TLDR version
+
+Cmd + Shift + P -> "Dev Con reopen"
+
+If host did not have proKey setup
+```
+/workspace/scripts/setProKey.sh
+```
+
+On a host that has proKey setup: 
+```
+less .vaadin/proKey
+```
+
+Copy and paste...
+
+Run the keycloak 8081 tunnel: 
+```
+/workspace/scripts/tunnelKeyCloak.sh 
+```
+
+In another terminal run: 
+```
+./mvnw spring-boot:run
+```
+
+### Descriptive version
+
+The Project includes a full dev container setup as well. The dev container uses a docker container to run the actual enviornment while the workspace folder is mounted from the host to the container. It is not strictly necessary to develop against the host filesystem, the dev contianer includes git and if desired, the repository could be checked out inside the container as well. 
+
+However, in order to run the entire example application, including the keycloak and development container there are two docker compose files: `docker-compose.yml` and `docker-compose-devcontainer.yml`. The former has the application specific services (only Keycloak in this example but could also include databases, reddit, rabbits, etc.) while the latter has the dev container specific configurations, including workspace mounts etc. These two compose files are used by the devcontainer.json specification under `.devcontainer`
+
+The dev container itself is beased on: 
+- TODO make a project and push to docker hub for easier reuse
+- Dockerfile that describes the container configurations themselves
+- the bind mounts to the host filesystem
+
+In order to run the dev container first clone the project and open it up in VS Code. While VS Code might suggest plugins etc to be installed we don't actually need to build anything on the host. 
+
+If not already picked up by VS Code, you can open up the VS Code Command Promt (Cmd + Shift + P on OS X or click at the top of vs code and add a > to enter commands mode) and type "Dev Con rebuild" an you should have an option to run "Dev Containers: Rebuild in Container". This is handy if you're working on changes to the devcontainer itself, otherwise you can look for "Dev Con reopen" and you should have an option to "Reopen in Container" which will build and/or reuse an existing dev container if present.  
+
+VS Code should start building the container and refresh itself after it has connected to the container. 
+
+If your host did not have a proKey setup under .vaadin already, then there is a script for copying it from a host that has it set up: 
+
+```
+/workspace/scripts/setProKey.sh
+```
+
+Alternatively you could use a `offlineKey` however as these are machine dependent it might become problematic.
+
+
+# TODO Old suff below, review and clean up... 
+
 # Setup
 There are docker compose files under the `/docker` folder. 
 
