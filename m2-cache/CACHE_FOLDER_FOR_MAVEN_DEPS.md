@@ -1,0 +1,3 @@
+This folder is mounted into the dev container and used as a cachek for maven dependencies so that if/when the container is recreated, not all dependencies need to be redownloaded. 
+
+Disable this behaviour in docker-compose-devcontainer.yml volumes section if desired... 
