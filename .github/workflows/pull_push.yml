@@ -27,7 +27,7 @@ jobs:
       run: mvn -B clean package -Pproduction --file pom.xml -DskipTests
 
     - name: Start Docker Compose services (Keycloak)
-      run: docker-compose up -d
+      run: docker compose up -d
 
     - name: Check running Compose services
       run: docker ps -a
@@ -39,4 +39,4 @@ jobs:
 
     - name: Stop Docker Compose services
       if: always()
-      run: docker-compose down
+      run: docker compose down
