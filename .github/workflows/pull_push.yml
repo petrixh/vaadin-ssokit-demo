@@ -32,6 +32,9 @@ jobs:
     - name: Check running Compose services
       run: docker ps -a
 
+    - name: Log Compose services
+      run:  docker logs sso-kit-demo-keycloak
+
     - name: Install socat 
       run: sudo apt-get update && sudo apt-get install -y socat
 
