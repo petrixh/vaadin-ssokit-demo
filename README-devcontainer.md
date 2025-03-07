@@ -86,7 +86,7 @@ To jump from the devcontainer back to the host, in the bottom left you can click
 In theory, the `devcontainer.json` has a `shutdownAction` that should run a `compose down` once VS Code is closed or disconnected from the container... However, theory and practice don't always meet. So in case they didn't from the host you can run: 
 
 ```
-docker compose -f docker-compose-devconatiner.yml down && docker compose down 
+docker compose -f docker-compose-devcontainer.yml down && docker compose down  
 ```
 
 To bring down the dev container and the services (only keycloak in this case) conatiners. 
