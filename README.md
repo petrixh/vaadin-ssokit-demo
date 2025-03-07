@@ -24,6 +24,7 @@ The container *will* forward the following from the host to the container:
 - current working directory under /workspace
 - curerent user home/.vaadin under /dot-vaadin
 - will forward the hosts docker socket to the container i.e. container can start/stop containers and has the same capabilities as running docker on the host
+- will mount the containers .m2 folder to the project checkout folder/m2-cache
 
 ### TLDR version
 
