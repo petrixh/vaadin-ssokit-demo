@@ -30,10 +30,10 @@ jobs:
       run: docker compose up -d
 
     - name: Check running Compose services
-      run: docker ps -a
+      run: docker ps -a | tee docker_ps_output.txt
 
     - name: Log Compose services
-      run:  docker logs sso-kit-demo-keycloak
+      run: docker logs sso-kit-demo-keycloak | tee docker_logs_output.txt
 
     - name: Install socat 
       run: sudo apt-get update && sudo apt-get install -y socat
