@@ -9,7 +9,11 @@ The keycloak data is stored under docker/keycloak_data... It is recommended to i
 find docker/keycloak_data -type f ! -name '*lock.db' -exec git update-index --assume-unchanged {} \;
 ```
 
-to have git ignore any changes to these files.... 
+to have git ignore any changes to these files, to reset the files (for instance when switching branches) run: 
+
+```
+git restore docker/keycloak_data/h2/*
+```
 
 To run the project, you will need to have a license for Vaadin SSO Kit. 
 
