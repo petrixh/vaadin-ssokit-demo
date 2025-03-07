@@ -1,20 +1,27 @@
 # Setup
-There are docker compose files under the `/docker` folder. 
+There are a fiew docker compose files under in this project. The project uses a preconfigured Keycloak server in docker which can be started with: 
 
 `docker-compose up -d`
 
-After setting up the keycloak docker image use: 
+The keycloak data is stored under docker/keycloak_data... It is recommended to ignore the changes there, you can run: 
 
-`docker stop keycloak-keycloak-1`
+```
+find docker/keycloak_data -type f ! -name '*lock.db' -exec git update-index --assume-unchanged {} \;
+```
 
-`docker start keycloak-keycloak-1`
+to have git ignore any changes to these files.... 
 
-to start and stop the container. compose down/up will eventually wipe your data as the container is destroyed and the volumes are not named. 
+To run the project, you will need to have a license for Vaadin SSO Kit. 
 
-(or whatever the container is called, check with `docker ps` or `docker container list -all` tab autocomplete should work at least if running docker as non-root)
+To run the project after starting the keycloak server run: 
 
+```
+./mvnw spring-boot:run
+```
 
-## Keycloak setup
+To develop inside a dev contaienr or Github codespaces, see: [README-devcontainer.md](README-devcontainer.md)
+
+## Keycloak setup (manual/recreate db)
 
 Login to the admin console, Keycloak typically runs on port 8080, however the example has it on 8081 to avoid clashes
 when running both on localhost, (see docker-compose.yml for ports, passwords etc...)

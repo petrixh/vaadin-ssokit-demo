@@ -1,0 +1,15 @@
+{
+  "name": "Vaadin SSO Kit Demo - Java 17 Dev Container",
+  "dockerComposeFile": ["../docker-compose.yml", "../docker-compose-devcontainer.yml"],
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "extensions": [
+    "vscjava.vscode-java-pack"
+  ],
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "postCreateCommand": "/workspace/scripts/postCreateScript.sh"
+  
+}

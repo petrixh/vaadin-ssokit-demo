@@ -1,0 +1,16 @@
+services:
+   
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0
+    container_name: sso-kit-demo-keycloak
+    hostname: sso-kit-demo-keycloak
+    ports:
+      - "8081:8080"
+      - "8787:8787"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      - ./docker/keycloak_data:/opt/keycloak/data
+    command:
+      - start-dev
