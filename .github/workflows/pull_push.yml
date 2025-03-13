@@ -41,6 +41,12 @@ jobs:
     - name: Run Keycloak 8081 tunnel
       run: ./scripts/tunnelKeyCloak.sh & 
 
+    - name: Check running Compose services
+      run: docker ps -a | tee docker_ps_output.txt
+      
+    - name: Log Compose services
+      run: docker logs sso-kit-demo-keycloak | tee docker_logs_output.txt
+
     - name: Run tests
       env:
          VAADIN_OFFLINE_KEY: ${{ secrets.VAADIN_PRODMODE_CI_SERVER_KEY }}
