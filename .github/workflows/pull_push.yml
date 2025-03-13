@@ -25,6 +25,11 @@ jobs:
       env:
          VAADIN_OFFLINE_KEY: ${{ secrets.VAADIN_PRODMODE_CI_SERVER_KEY }}
       run: mvn -B clean package -Pproduction --file pom.xml -DskipTests
+      
+    - name: Prepare Keycloak data directory permissions for GH Actions
+      run: |
+        mkdir -p docker/keycloak_data
+        chmod -R 777 docker/keycloak_data
 
     - name: Start Docker Compose services (Keycloak)
       run: docker compose up -d
@@ -43,7 +48,7 @@ jobs:
 
     - name: Check running Compose services
       run: docker ps -a | tee docker_ps_output.txt
-      
+
     - name: Log Compose services
       run: docker logs sso-kit-demo-keycloak | tee docker_logs_output.txt
 
