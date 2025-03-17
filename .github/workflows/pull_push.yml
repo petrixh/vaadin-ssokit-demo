@@ -1,0 +1,62 @@
+name: Maven Build and Run Tests 
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      env:
+         VAADIN_OFFLINE_KEY: ${{ secrets.VAADIN_PRODMODE_CI_SERVER_KEY }}
+      run: mvn -B clean package -Pproduction --file pom.xml -DskipTests
+      
+    - name: Prepare Keycloak data directory permissions for GH Actions
+      run: |
+        mkdir -p docker/keycloak_data
+        chmod -R 777 docker/keycloak_data
+
+    - name: Start Docker Compose services (Keycloak)
+      run: docker compose up -d
+
+    - name: Check running Compose services
+      run: docker ps -a | tee docker_ps_output.txt
+
+    - name: Log Compose services
+      run: docker logs sso-kit-demo-keycloak | tee docker_logs_output.txt
+
+    - name: Install socat 
+      run: sudo apt-get update && sudo apt-get install -y socat
+
+    - name: Run Keycloak 8081 tunnel
+      run: ./scripts/tunnelKeyCloak.sh & 
+
+    - name: Check running Compose services
+      run: docker ps -a | tee docker_ps_output.txt
+
+    - name: Log Compose services
+      run: docker logs sso-kit-demo-keycloak | tee docker_logs_output.txt
+
+    - name: Run tests
+      env:
+         VAADIN_OFFLINE_KEY: ${{ secrets.VAADIN_PRODMODE_CI_SERVER_KEY }}
+      run: mvn -B verify -Pproduction,it --file pom.xml -Dcom.vaadin.testbench.Parameters.chromeOptions="--headless --disable-gpu"
+
+    - name: Stop Docker Compose services
+      if: always()
+      run: docker compose down
