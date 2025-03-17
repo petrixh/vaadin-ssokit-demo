@@ -12,7 +12,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <vaadin.version>23.3.0</vaadin.version>
+        <vaadin.version>24.6.6</vaadin.version>
         <!-- this parameter is needed as spring-boot bom overwrites it -->
         <selenium.version>4.4.0</selenium.version>
         <!-- selenium is so much verbose -->
@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>3.4.3</version>
     </parent>
 
     <repositories>
