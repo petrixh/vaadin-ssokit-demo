@@ -21,7 +21,7 @@ error-screenshots/
 webpack.generated.js
 index.html
 
-#docker/keycloak_data/
+docker/keycloak_data/
 m2-cache/
 src/main/frontend/generated/
 src/main/frontend/index.html
