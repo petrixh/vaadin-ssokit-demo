@@ -7,17 +7,21 @@ import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.security.AuthenticationContext;
+
+import jakarta.annotation.security.RolesAllowed;
+
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.AddressStandardClaim;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
-import javax.annotation.security.RolesAllowed;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -33,6 +37,7 @@ import java.util.stream.Collectors;
 @RolesAllowed({"admin"})
 @PageTitle("Admin Profile")
 @Route(value = "admin_profile", layout = MainLayout.class)
+@Menu(order = 2, icon = LineAwesomeIconUrl.GLOBE_SOLID)
 public class AdminProfile extends VerticalLayout {
 
     public AdminProfile(AuthenticationContext authenticationContext) throws InvocationTargetException, IllegalAccessException {
@@ -293,11 +298,6 @@ public class AdminProfile extends VerticalLayout {
 
         public boolean hasClaim(String claim) {
             return user.hasClaim(claim);
-        }
-
-        @Deprecated
-        public Boolean containsClaim(String claim) {
-            return user.containsClaim(claim);
         }
 
         public String getClaimAsString(String claim) {

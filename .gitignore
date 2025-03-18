@@ -23,3 +23,5 @@ index.html
 
 docker/keycloak_data/
 m2-cache/
+src/main/frontend/generated/
+src/main/frontend/index.html

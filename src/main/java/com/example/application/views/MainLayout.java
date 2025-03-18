@@ -1,32 +1,38 @@
 package com.example.application.views;
 
 
-import com.example.application.components.appnav.AppNav;
-import com.example.application.components.appnav.AppNavItem;
-import com.example.application.views.about.AboutView;
-import com.example.application.views.helloworld.AdminProfile;
-import com.example.application.views.helloworld.HelloProfile;
-import com.example.application.views.helloworld.HelloWorldView;
+
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
-import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.router.Layout;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import com.vaadin.flow.server.menu.MenuConfiguration;
+import com.vaadin.flow.server.menu.MenuEntry;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+
+import java.util.List;
+
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
+@Layout
+@AnonymousAllowed
 public class MainLayout extends AppLayout {
 
     private final AuthenticationContext authenticationContext;
-    private H2 viewTitle;
+    private H1 viewTitle;
 
     public MainLayout(AuthenticationContext authenticationContext) {
         this.authenticationContext = authenticationContext;
@@ -37,35 +43,35 @@ public class MainLayout extends AppLayout {
 
     private void addHeaderContent() {
         DrawerToggle toggle = new DrawerToggle();
-        toggle.getElement().setAttribute("aria-label", "Menu toggle");
+        toggle.setAriaLabel("Menu toggle");
 
-        viewTitle = new H2();
+        viewTitle = new H1();
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
 
         addToNavbar(true, toggle, viewTitle);
     }
 
     private void addDrawerContent() {
-        H1 appName = new H1("SSO Kit Test 2");
-        appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
+        Span appName = new Span("SSO Kit Test 2");
+        appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
         Header header = new Header(appName);
 
         Scroller scroller = new Scroller(createNavigation());
 
         addToDrawer(header, scroller, createFooter());
-
-
     }
 
-    private AppNav createNavigation() {
-        // AppNav is not yet an official component.
-        // For documentation, visit https://github.com/vaadin/vcf-nav#readme
-        AppNav nav = new AppNav();
+    private SideNav createNavigation() {
+        SideNav nav = new SideNav();
 
-        nav.addItem(new AppNavItem("Hello World", HelloWorldView.class, "la la-globe"));
-        nav.addItem(new AppNavItem("Hello Profile Role", HelloProfile.class, "la la-globe"));
-        nav.addItem(new AppNavItem("Hello Admin Role Profile", AdminProfile.class, "la la-globe"));
-        nav.addItem(new AppNavItem("About", AboutView.class, "la la-file"));
+        List<MenuEntry> menuEntries = MenuConfiguration.getMenuEntries();
+        menuEntries.forEach(entry -> {
+            if (entry.icon() != null) {
+                nav.addItem(new SideNavItem(entry.title(), entry.path(), new SvgIcon(entry.icon())));
+            } else {
+                nav.addItem(new SideNavItem(entry.title(), entry.path()));
+            }
+        });
 
         return nav;
     }
@@ -89,7 +95,6 @@ public class MainLayout extends AppLayout {
     }
 
     private String getCurrentPageTitle() {
-        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
-        return title == null ? "" : title.value();
+        return MenuConfiguration.getPageHeader(getContent()).orElse("");
     }
 }

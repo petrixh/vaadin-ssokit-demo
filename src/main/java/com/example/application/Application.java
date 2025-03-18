@@ -19,8 +19,6 @@ import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 @SpringBootApplication
 @Theme(value = "ssokittest2")
 @PWA(name = "SSO Kit Test 2", shortName = "SSO Kit Test 2", offlineResources = {})
-@NpmPackage(value = "line-awesome", version = "1.3.0")
-@NpmPackage(value = "@vaadin-component-factory/vcf-nav", version = "1.0.6")
 @Configuration
 public class Application implements AppShellConfigurator {
 
