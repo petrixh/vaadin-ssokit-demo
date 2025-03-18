@@ -59,7 +59,7 @@ In the Keycloak admin console:
 - Go to the `Creadentials` tab
 - Set the password, uncheck `Temporary` unless you want to be forced to change it on the first login...
 - Go to the `Role mapping` tab
-- Click on `Assign role`
+- Click on `Assign role` -> Filter by... -> ...realm roles
 - Select the `test-role` role
 - Repeat for another user called `admin`
 - Add both the `admin` and the `test-role` roles to the admin user
@@ -90,6 +90,7 @@ Next let's check if your version of Keycloak too has amnesia
 
 If your Keycloak also suffers from amnesia, do the following:   
 - Navigate to `Client scopes` -> `roles` (row) -> `Mappers` (tab) -> `realm roles` (row)
+- Ensure `Add to userinfo` is selected... 
 - Press `Save` (no need to change anything, just remind Keycloak that these should be included...)
   - You could take note of `Token Claim Name`, this is what will be parsed on the Vaadin side when determining roles
 
