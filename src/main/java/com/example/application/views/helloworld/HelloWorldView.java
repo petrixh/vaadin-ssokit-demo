@@ -17,7 +17,7 @@ import com.vaadin.flow.router.RouteAlias;
 
 import jakarta.annotation.security.RolesAllowed;
 
-@RolesAllowed({"USER"})
+@RolesAllowed({"USER", "test-role"})
 @PageTitle("Hello World")
 @Route(value = "hello", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
@@ -28,7 +28,7 @@ public class HelloWorldView extends VerticalLayout {
     private Button sayHello;
 
     public HelloWorldView() {
-        add(new H1("This is for any user with the default USER role"));
+        add(new H1("This is for any user with the default USER or 'test-role' roles"));
 
         name = new TextField("Your name");
         sayHello = new Button("Say hello");
