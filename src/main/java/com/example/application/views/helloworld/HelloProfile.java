@@ -9,12 +9,16 @@ import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.security.AuthenticationContext;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
+
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.vaadin.lineawesome.LineAwesomeIconUrl;
+
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -25,6 +29,7 @@ import java.util.stream.Collectors;
 @RolesAllowed({"test-role"})
 @PageTitle("Hello World")
 @Route(value = "profile", layout = MainLayout.class)
+@Menu(order = 1, icon = LineAwesomeIconUrl.GLOBE_SOLID)
 public class HelloProfile extends VerticalLayout {
 
     public HelloProfile(AuthenticationContext authenticationContext) throws InvocationTargetException, IllegalAccessException {

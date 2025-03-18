@@ -7,13 +7,16 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.security.AuthenticationContext;
+
+import jakarta.annotation.security.PermitAll;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
-import javax.annotation.security.PermitAll;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +24,7 @@ import java.util.Optional;
 @PermitAll
 @PageTitle("About")
 @Route(value = "about", layout = MainLayout.class)
+@Menu(order = 3)
 public class AboutView extends VerticalLayout {
 
     public AboutView(AuthenticationContext authenticationContext) {
