@@ -31,32 +31,17 @@ public class SmokeIT extends BrowserTestBase {
     public void clickButton() {
 
         log.info("Starting test...");
-
         log.info("URL: " + getDriver().getCurrentUrl());
-        //log.info("Src: " + getDriver().getPageSource());
-
+        
         doKeycloakLogin("test", "test");
-
+        
         log.info("Login done...");
-
         log.info("URL: " + getDriver().getCurrentUrl());
-        //log.info("Src: " + getDriver().getPageSource());
 
-        log.info("Sleeping...");
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        log.info("Done sleeping");
-
+        log.info("Refresh to base URL:");
+        getDriver().get("http://localhost:8080/");
         log.info("URL: " + getDriver().getCurrentUrl());
-        //log.info("Src: " + getDriver().getPageSource());
-
-
+       
         // Find the first button (<vaadin-button>) on the page
         ButtonElement button = $(ButtonElement.class).first();
 
@@ -64,7 +49,6 @@ public class SmokeIT extends BrowserTestBase {
 
         //Assertions.assertTrue(button.isDisplayed(), "Button not found");
 
-        getDriver().get("http://localhost:8080/");
         log.info("Attempting logout...");
 
         //Logout
