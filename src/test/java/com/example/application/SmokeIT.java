@@ -22,7 +22,18 @@ public class SmokeIT extends BrowserTestBase {
     @BrowserTest
     public void clickButton() {
 
+        System.out.println("Starting test...");
+
         doKeycloakLogin("test", "test");
+
+        System.out.println("Login done...");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
 
         // Find the first button (<vaadin-button>) on the page
@@ -34,8 +45,13 @@ public class SmokeIT extends BrowserTestBase {
         // Check that text of the button is "Clicked"
         Assertions.assertEquals("Say hello", button.getText());
 
+        System.out.println("Attempting logout...");
+
         //Logout
         $(ButtonElement.class).withCaption("Logout").first().click();   
+        
+
+        //Check if we are back to the login page
 
         Assertions.assertTrue(isKcLoginPage(), "Keycloak login page not found");
     }
