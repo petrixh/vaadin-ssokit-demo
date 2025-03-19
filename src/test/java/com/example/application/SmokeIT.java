@@ -1,5 +1,7 @@
 package com.example.application;
 
+import java.util.logging.Logger;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
@@ -10,6 +12,8 @@ import com.vaadin.testbench.BrowserTestBase;
 import com.vaadin.testbench.TestBench;
 
 public class SmokeIT extends BrowserTestBase {
+
+    private static Logger log = Logger.getLogger(SmokeIT.class.getName());
 
     @BeforeEach
     public void setup() throws Exception {
@@ -22,11 +26,19 @@ public class SmokeIT extends BrowserTestBase {
     @BrowserTest
     public void clickButton() {
 
-        System.out.println("Starting test...");
+        log.info("Starting test...");
+
+        log.info("URL: " + getDriver().getCurrentUrl());
+        log.info("Src: " + getDriver().getPageSource());
 
         doKeycloakLogin("test", "test");
 
-        System.out.println("Login done...");
+        log.info("Login done...");
+
+        log.info("URL: " + getDriver().getCurrentUrl());
+        log.info("Src: " + getDriver().getPageSource());
+
+        log.info("Sleeping...");
 
         try {
             Thread.sleep(1000);
@@ -34,6 +46,11 @@ public class SmokeIT extends BrowserTestBase {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        log.info("Done sleeping");
+
+        log.info("URL: " + getDriver().getCurrentUrl());
+        log.info("Src: " + getDriver().getPageSource());
 
 
         // Find the first button (<vaadin-button>) on the page
@@ -45,11 +62,11 @@ public class SmokeIT extends BrowserTestBase {
         // Check that text of the button is "Clicked"
         Assertions.assertEquals("Say hello", button.getText());
 
-        System.out.println("Attempting logout...");
+        log.info("Attempting logout...");
 
         //Logout
         $(ButtonElement.class).withCaption("Logout").first().click();   
-        
+
 
         //Check if we are back to the login page
 
