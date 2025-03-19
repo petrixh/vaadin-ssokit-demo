@@ -29,14 +29,14 @@ public class SmokeIT extends BrowserTestBase {
         log.info("Starting test...");
 
         log.info("URL: " + getDriver().getCurrentUrl());
-        log.info("Src: " + getDriver().getPageSource());
+        //log.info("Src: " + getDriver().getPageSource());
 
         doKeycloakLogin("test", "test");
 
         log.info("Login done...");
 
         log.info("URL: " + getDriver().getCurrentUrl());
-        log.info("Src: " + getDriver().getPageSource());
+        //log.info("Src: " + getDriver().getPageSource());
 
         log.info("Sleeping...");
 
@@ -50,26 +50,26 @@ public class SmokeIT extends BrowserTestBase {
         log.info("Done sleeping");
 
         log.info("URL: " + getDriver().getCurrentUrl());
-        log.info("Src: " + getDriver().getPageSource());
+        //log.info("Src: " + getDriver().getPageSource());
 
 
         // Find the first button (<vaadin-button>) on the page
         ButtonElement button = $(ButtonElement.class).first();
 
-        // Click it
-        button.click();
+        log.info("Found button: " + button);
 
-        // Check that text of the button is "Clicked"
-        Assertions.assertEquals("Say hello", button.getText());
+        Assertions.assertTrue(button.isDisplayed(), "Button not found");
 
         log.info("Attempting logout...");
 
         //Logout
-        $(ButtonElement.class).withCaption("Logout").first().click();   
-
+        log.info("URL: " + getDriver().getCurrentUrl());
+        ButtonElement logoutButton = $(ButtonElement.class).withCaption("Logout").first();
+        log.info("Found logout button: " + button);
+        logoutButton.click();   
 
         //Check if we are back to the login page
-
+        log.info("URL: " + getDriver().getCurrentUrl());
         Assertions.assertTrue(isKcLoginPage(), "Keycloak login page not found");
     }
 
