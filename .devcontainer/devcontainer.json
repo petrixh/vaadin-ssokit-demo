@@ -12,6 +12,8 @@
   ],
   "features": {
     //"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+
+    //Yes it's cool, DON'T DO THIS IN PRODUCTION!
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"version": "latest",
 			"enableNonRootDocker": "true",
