@@ -11,7 +11,7 @@ services:
       # If host has deps pre-downloaded: cp -r ~/.m2/* ./m2-cache/
       - ./m2-cache:/home/ubuntu/.m2:delegated # cache maven deps for faster builds... 
       # (Optional) Mount the Docker socket if you need to run docker commands inside the container:
-      - /var/run/docker.sock:/var/run/docker.sock
+      #- /var/run/docker.sock:/var/run/docker.sock
     # Overrides default command so things don't shut down after the process ends.
     command: /bin/sh -c "while sleep 1000; do :; done"
     # This is the primary container where you'll do your development work.
