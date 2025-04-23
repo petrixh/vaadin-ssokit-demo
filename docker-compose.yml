@@ -1,7 +1,7 @@
 services:
    
   keycloak:
-    image: quay.io/keycloak/keycloak:26.1
+    image: quay.io/keycloak/keycloak:26.2
     container_name: sso-kit-demo-keycloak
     hostname: sso-kit-demo-keycloak
     ports:
