@@ -21,10 +21,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      env:
-         VAADIN_OFFLINE_KEY: ${{ secrets.VAADIN_PRODMODE_CI_SERVER_KEY }}
-      run: mvn -B clean package -Pproduction --file pom.xml -DskipTests
+#    - name: Build with Maven
+#      env:
+#         VAADIN_OFFLINE_KEY: ${{ secrets.VAADIN_PRODMODE_CI_SERVER_KEY }}
+#      run: mvn -B clean package -Pproduction --file pom.xml -DskipTests
       
     - name: Prepare Keycloak data directory permissions for GH Actions
       run: |
