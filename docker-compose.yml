@@ -10,6 +10,8 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB_USERNAME: sa
+      KC_DB_PASSWORD: 
     volumes:
       - ./docker/keycloak_data:/opt/keycloak/data
     command:

@@ -12,13 +12,6 @@ The container *will* forward the following from the host to the container:
 
 Cmd + Shift + P -> "Dev Con reopen"
 
-Copy and paste...
-
-Run the keycloak 8081 tunnel: 
-```
-/workspace/scripts/tunnelKeyCloak.sh 
-```
-
 In another terminal run: 
 ```
 ./mvnw spring-boot:run
@@ -45,15 +38,17 @@ If your host did not have a proKey setup under .vaadin already, you will be aske
 
 Alternatively you could use a `offlineKey` however as these are machine dependent it might become problematic. If you use a `serverKey` then you need to run the build with `-Pproduction` as server key only allows production builds. 
 
-Once the container is running and VS Code has stabilised, open a terminal and run: 
+Run the keycloak contianer (without -d if issues to see the logs): 
 
 ```
-./scripts/tunnelKeyCloak.sh
+docker compose up -d 
 ```
+
+Once the container is running and VS Code has stabilised VS Code should atuomatically forward port 8081 
 
 This tunnels "localhost:8081" from within the container to the keycloak so that when the Vaadin applicaiton in `application.properties` has the SSO provider as `localhost:8081` it will work. This also makes it possible for the rediection to the SSO Provider (which will be localhost:8081) and also gives you access to the keycloak admin UI on http://localhost:8081 (user: admin, pass: admin in the preconfigured dababase). 
 
-In antother terminal you can run `docker ps` or `docker stats` and you should see two containers, you are actually inside the one ending `-app-1` and the docker socket is passed through to it fromt he host in `docker-compose-devcontainer.yml` volumes section and the dev container has the feature `docker-outside-of-docker` enabled in `.devcontainer/devcontainer.json` so that you can control docker from the container just as if you were on the host.
+If you check the docker on the docker hosts terminal you can run `docker ps` or `docker stats` and you should see only one container, you are actually inside the one ending `-app-1`. Dokcer in Docker allows you to run containers within the container. For local development this is probably fine, however for prod use there are privilegie escalation concerns that seem to state to only use this "if you know what you're doing"... we don't, so don't do it as a production setup!
 
 ### Running the application inside the container
 
@@ -107,11 +102,11 @@ After the codespace has intialized itself, you can use the command palette (Cmd 
 
 After this VS Code should open up just as if you were running locally or against a SSH host. 
 
-Run the tunnel for `localhost:8081` for Keycloak redirects in a terminal from VS Code: 
+Run keycloak with: 
 
-```
-./scripts/tunnelKeyCloak.sh 
-```
+````
+docker compose up -d
+````
 
 VS Code should automatically forward port 8081 to your localhost so now you should be able to access the Keycloak admin UI on http://localhost:8081
 
