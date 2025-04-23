@@ -1,8 +1,6 @@
 package com.example.application;
 
-import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
-import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +16,7 @@ import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
  */
 @SpringBootApplication
 @Theme(value = "ssokittest2")
-@PWA(name = "SSO Kit Test 2", shortName = "SSO Kit Test 2", offlineResources = {})
+//@PWA(name = "SSO Kit Test 2", shortName = "SSO Kit Test 2", offlineResources = {})
 @Configuration
 public class Application implements AppShellConfigurator {
 
