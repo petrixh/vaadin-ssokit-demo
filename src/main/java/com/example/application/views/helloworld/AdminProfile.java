@@ -73,7 +73,7 @@ public class AdminProfile extends VerticalLayout {
             Binder<OidcUserProxy> binder = new Binder<>(OidcUserProxy.class);
             binder.setBean(userProxy);
 
-            List<Method> declaredMethods = Arrays.stream(userProxy.getClass().getDeclaredMethods()).collect(Collectors.toList());
+            List<Method> declaredMethods = Arrays.stream(this.userProxy.getClass().getDeclaredMethods()).collect(Collectors.toList());
 
             List<Method> strings =
                 declaredMethods.stream().filter(m -> m.getReturnType().isAssignableFrom(String.class)).collect(Collectors.toList());

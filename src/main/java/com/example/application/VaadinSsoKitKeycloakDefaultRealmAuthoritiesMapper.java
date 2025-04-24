@@ -23,6 +23,7 @@ public class VaadinSsoKitKeycloakDefaultRealmAuthoritiesMapper implements Vaadin
     private static Logger logger = Logger.getLogger(VaadinSsoKitKeycloakDefaultRealmAuthoritiesMapper.class.getName());
     private Level LOG_LEVEL = Level.FINE;
 
+    @SuppressWarnings("rawtypes")
     @Override
     public Collection<? extends GrantedAuthority> mapAuthorities(Collection<? extends GrantedAuthority> authorities, OidcUserInfo userInfo) {
         List<? extends GrantedAuthority> mappedGrantedAuthorities = new ArrayList<>(authorities);

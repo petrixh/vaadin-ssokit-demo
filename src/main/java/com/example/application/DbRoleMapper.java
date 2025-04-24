@@ -23,8 +23,8 @@ public class DbRoleMapper implements VaadinOidcUserService.VaadinSsoAuthoritiesM
 
                 List<? extends GrantedAuthority> mappedGrantedAuthorities = new ArrayList<>(authorities);
 
-                String email = userInfo.getEmail(); 
-                String subject = userInfo.getSubject(); 
+                //String email = userInfo.getEmail(); 
+                //String subject = userInfo.getSubject(); 
                 String preferredUsername = userInfo.getPreferredUsername(); 
 
                 //Simulate fetching roles for the user from a database based on the appropriate identifier, be it email, the pricipal id or username
