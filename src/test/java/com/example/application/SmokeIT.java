@@ -10,7 +10,6 @@ import org.openqa.selenium.Dimension;
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.testbench.BrowserTest;
 import com.vaadin.testbench.BrowserTestBase;
-import com.vaadin.testbench.TestBench;
 
 public class SmokeIT extends BrowserTestBase {
 

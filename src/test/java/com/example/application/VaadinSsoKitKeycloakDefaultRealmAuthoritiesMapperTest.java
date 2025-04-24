@@ -29,6 +29,7 @@ class VaadinSsoKitKeycloakDefaultRealmAuthoritiesMapperTest {
     void tearDown() {
     }
 
+    @SuppressWarnings("rawtypes")
     @Test
     void mapAuthorities_baseCaseWithMapToList() {
         //Setup
