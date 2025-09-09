@@ -13,8 +13,6 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 
-import jakarta.annotation.security.PermitAll;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
@@ -22,7 +20,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
-@PermitAll
+@AnonymousAllowed
 @PageTitle("About")
 @Route(value = "about", layout = MainLayout.class)
 @Menu(order = 3)
