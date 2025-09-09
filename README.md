@@ -3,17 +3,17 @@ There are a fiew docker compose files under in this project. The project uses a 
 
 `docker-compose up -d`
 
-The keycloak data is stored under docker/keycloak_data... It is recommended to ignore the changes there, you can run: 
+The `vaadin-sso` keycloak realm is imported on each keycloak container recreate, state is intentionally not stored between crates to ensure CI builds are consistent. 
+
+The realm export with users etc. CI/CD passwords and secretes are exported under: `keycloak_import` do *NOT* use these for anything! 
+
+To reset KC simply run: 
 
 ```
-find docker/keycloak_data -type f ! -name '*lock.db' -exec git update-index --assume-unchanged {} \;
+docker compose down && docker compose up
 ```
 
-to have git ignore any changes to these files, to reset the files (for instance when switching branches) run: 
-
-```
-git restore docker/keycloak_data/h2/*
-```
+and it should return back to the default state. 
 
 To run the project, you will need to have a license for Vaadin SSO Kit. 
 
@@ -22,8 +22,6 @@ To run the project after starting the keycloak server run:
 ```
 ./mvnw spring-boot:run
 ```
-
-To develop inside a dev contaienr or Github codespaces, see: [README-devcontainer.md](README-devcontainer.md)
 
 ## Example project structure
 There are a few views under the `views` package: 

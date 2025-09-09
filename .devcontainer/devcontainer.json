@@ -1,18 +1,14 @@
 {
-  "name": "SSO Kit Demo - Java 17 Dev Container",
-  "dockerComposeFile": ["../docker-compose-devcontainer.yml"],
-  //"dockerComposeFile": ["../docker-compose.yml", "../docker-compose-devcontainer.yml"],
-  //"dockerComposeFile": ["docker-compose-devcontainer.yml", "../docker-compose.yml"],
-  //"dockerComposeFile": ["docker-compose-devcontainer.yml"],
-  "service": "app",
-  "workspaceFolder": "/workspace",
-  "shutdownAction": "stopCompose",
-  "extensions": [
-    "vscjava.vscode-java-pack"
-  ],
+  "name": "SSO Kit Demo - Java 21 Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/java:21",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  },
   "features": {
-    //"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
-
     //Yes it's cool, DON'T DO THIS IN PRODUCTION!
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"version": "latest",
@@ -20,8 +16,12 @@
 			"moby": "true"
 		}
   },
-  // Ensure we can run and execute the scripts under the scripts folder for the devcontainer after it has been created. 
-  "postCreateCommand": "echo '\n********\nMaking scripts under .devcontainer/scripts/*.sh owned by user ubuntu and executable. Running post create script...\n********' && chown ubuntu:ubuntu ./.devcontainer/scripts/*.sh && chmod +x ./.devcontainer/scripts/*.sh && /workspace/.devcontainer/scripts/postCreateScript.sh",
-  //"postStartCommand": "chmod -R 777 docker/keycloak_data && docker compose up"
+
+  "mounts": [
+    "source=${localEnv:HOME}/.m2,target=/home/vscode/.m2,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.vaadin,target=/dot-vaadin,type=bind,consistency=cached,readonly"
+  ], 
+
+  "postCreateCommand": "/workspaces/vaadin-ssokit-demo/.devcontainer/scripts/postCreateScript.sh"
   
 }
