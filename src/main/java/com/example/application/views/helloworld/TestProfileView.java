@@ -14,6 +14,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -26,15 +27,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RolesAllowed({"test-role"})
-@PageTitle("Hello World")
+@PermitAll
+@PageTitle("'Test' users view")
 @Route(value = "profile", layout = MainLayout.class)
 @Menu(order = 1, icon = LineAwesomeIconUrl.GLOBE_SOLID)
-public class HelloProfile extends VerticalLayout {
+public class TestProfileView extends VerticalLayout {
 
-    public HelloProfile(AuthenticationContext authenticationContext) throws InvocationTargetException, IllegalAccessException {
+    public TestProfileView(AuthenticationContext authenticationContext) throws InvocationTargetException, IllegalAccessException {
 
-        add(new H1("This is for users with test-role only"));
+        add(new H1("This is for 'test' users only"));
 
         setWidthFull();
         Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser(OidcUser.class);
