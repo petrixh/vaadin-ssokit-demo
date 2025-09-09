@@ -9,7 +9,7 @@ services:
       - ${HOME}/.vaadin:/dot-vaadin:ro # to pass configs etc.. 
       # Optional, need to copy the host m2 folder manually prior to launching the devcontainer if desired, otherwise will simply work as a cache betweeen container recreates..
       # If host has deps pre-downloaded: cp -r ~/.m2/* ./m2-cache/
-      - ~/.m2/:/home/ubuntu/.m2:delegated # cache maven deps for faster builds... 
+      - ${HOME}/.m2/:/home/ubuntu/.m2:delegated # cache maven deps for faster builds... 
       # (Optional) Mount the Docker socket if you need to run docker commands inside the container:
       #- /var/run/docker.sock:/var/run/docker.sock
     # Overrides default command so things don't shut down after the process ends.
