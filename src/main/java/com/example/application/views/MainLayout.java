@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 
 /**
  * The main view is a top-level placeholder for other views.
