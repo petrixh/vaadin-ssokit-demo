@@ -2,7 +2,7 @@ package com.example.application.views;
 
 
 
-import com.example.application.CustomAccessDeniedException;
+import com.example.application.views.error.CustomAccessDeniedException;
 import com.example.application.views.helloworld.AdminProfileView;
 import com.example.application.views.helloworld.TestProfileView;
 import com.vaadin.flow.component.applayout.AppLayout;

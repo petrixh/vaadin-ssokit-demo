@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.views.error;
 
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
