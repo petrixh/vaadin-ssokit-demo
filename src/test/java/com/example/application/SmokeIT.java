@@ -47,7 +47,7 @@ public class SmokeIT extends BrowserTestBase {
         //Assertions.assertTrue(button.isDisplayed(), "Button not found");
         
         // Assert the right greeting is shown...
-        boolean greetingPresent = $(H1Element.class).withCaption("This is for any admin or test user").exists();
+        boolean greetingPresent = $(H1Element.class).withText("This is for any admin or test user").exists();
         Assertions.assertTrue(greetingPresent, "Expected greeting in H1 element in view not found"); 
 
 
