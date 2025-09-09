@@ -8,11 +8,14 @@ services:
       - "8081:8080"
       - "8787:8787"
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      IMPORT_FILES_LOCATIONS: /opt/keycloak/data/import
       KC_DB_USERNAME: sa
       KC_DB_PASSWORD: 
     volumes:
-      - ./docker/keycloak_data:/opt/keycloak/data
+      - ./keycloak_import:/opt/keycloak/data/import
     command:
       - start-dev
+      - --import-realm
+      #- --verbose
