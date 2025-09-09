@@ -1,5 +1,15 @@
 package com.example.application.views.helloworld;
 
+import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.vaadin.lineawesome.LineAwesomeIconUrl;
+
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
@@ -14,27 +24,17 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 
-import jakarta.annotation.security.RolesAllowed;
+import jakarta.annotation.security.PermitAll;
 
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.vaadin.lineawesome.LineAwesomeIconUrl;
-
-import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-@RolesAllowed({"test-role"})
-@PageTitle("Hello World")
+@PermitAll
+@PageTitle("'Test' users view")
 @Route(value = "profile", layout = MainLayout.class)
 @Menu(order = 1, icon = LineAwesomeIconUrl.GLOBE_SOLID)
-public class HelloProfile extends VerticalLayout {
+public class TestProfileView extends VerticalLayout {
 
-    public HelloProfile(AuthenticationContext authenticationContext) throws InvocationTargetException, IllegalAccessException {
+    public TestProfileView(AuthenticationContext authenticationContext) throws InvocationTargetException, IllegalAccessException {
 
-        add(new H1("This is for users with test-role only"));
+        add(new H1("This is for 'test' users only"));
 
         setWidthFull();
         Optional<OidcUser> authenticatedUser = authenticationContext.getAuthenticatedUser(OidcUser.class);

@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
+import com.vaadin.flow.component.html.testbench.H1Element;
 import com.vaadin.testbench.BrowserTest;
 import com.vaadin.testbench.BrowserTestBase;
 
@@ -40,13 +41,15 @@ public class SmokeIT extends BrowserTestBase {
         log.info("Refresh to base URL:");
         getDriver().get("http://localhost:8080/");
         log.info("URL: " + getDriver().getCurrentUrl());
-       
+
         // Find the first button (<vaadin-button>) on the page
         ButtonElement button = $(ButtonElement.class).first();
-
-        log.info("Found button: " + button);
-
         //Assertions.assertTrue(button.isDisplayed(), "Button not found");
+        
+        // Assert the right greeting is shown...
+        boolean greetingPresent = $(H1Element.class).withText("This is for any admin or test user").exists();
+        Assertions.assertTrue(greetingPresent, "Expected greeting in H1 element in view not found"); 
+
 
         log.info("Attempting logout...");
 

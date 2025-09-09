@@ -34,16 +34,32 @@ jobs:
     - name: Start Docker Compose services (Keycloak)
       run: docker compose up -d
 
+    - name: Wait for Keycloak to be ready
+      run: |
+        echo "Waiting for Keycloak health endpoint to be available..."
+        for i in {1..60}; do
+          if curl --head -fsS http://localhost:9000/health/ready > /dev/null 2>&1; then
+            echo "Keycloak health endpoint is responding!"
+            break
+          fi
+          echo "Attempt $i: Health endpoint not ready yet, waiting 5 seconds..."
+          sleep 5
+        done
+        
+        # Verify health endpoint is working
+        if ! curl --head -fsS http://localhost:9000/health/ready > /dev/null 2>&1; then
+          echo "Keycloak health endpoint failed to become available within 5 minutes"
+          echo "Container status:"
+          docker ps -a
+          echo "Keycloak logs:"
+          docker logs sso-kit-demo-keycloak
+          exit 1
+        fi
+
     - name: Check running Compose services
       run: docker ps -a | tee docker_ps_output.txt
 
-    - name: Log Compose services
-      run: docker logs sso-kit-demo-keycloak | tee docker_logs_output.txt
-
-    - name: Check running Compose services
-      run: docker ps -a | tee docker_ps_output.txt
-
-    - name: Log Compose services
+    - name: Log Keycloak services after startup
       run: docker logs sso-kit-demo-keycloak | tee docker_logs_output.txt
 
     - name: Run tests
