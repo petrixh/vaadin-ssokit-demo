@@ -1,5 +1,15 @@
 package com.example.application.views.helloworld;
 
+import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.vaadin.lineawesome.LineAwesomeIconUrl;
+
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
@@ -15,17 +25,6 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 
 import jakarta.annotation.security.PermitAll;
-import jakarta.annotation.security.RolesAllowed;
-
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.vaadin.lineawesome.LineAwesomeIconUrl;
-
-import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @PermitAll
 @PageTitle("'Test' users view")
