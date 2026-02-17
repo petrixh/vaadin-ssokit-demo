@@ -16,6 +16,8 @@ import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Layout;
@@ -35,7 +37,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
  */
 @Layout
 @AnonymousAllowed
-public class MainLayout extends AppLayout implements BeforeEnterObserver {
+public class MainLayout extends AppLayout implements BeforeEnterObserver, AfterNavigationObserver {
 
     private final AuthenticationContext authenticationContext;
     private H1 viewTitle;
@@ -95,8 +97,7 @@ public class MainLayout extends AppLayout implements BeforeEnterObserver {
     }
 
     @Override
-    protected void afterNavigation() {
-        super.afterNavigation();
+    public void afterNavigation(AfterNavigationEvent event) {
         viewTitle.setText(getCurrentPageTitle());
     }
 
