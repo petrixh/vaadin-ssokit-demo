@@ -1,3 +1,5 @@
+/* Main application styles - AppLayout customizations */
+
 vaadin-app-layout[primary-section="navbar"]::part(navbar)::before {
   background: var(--lumo-base-color) linear-gradient(var(--lumo-contrast-5pct), var(--lumo-contrast-5pct));
 }
