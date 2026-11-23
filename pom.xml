@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.1.2</version>
+        <version>4.2.0</version>
     </parent>
 
     <dependencyManagement>
@@ -101,12 +101,11 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.12.0</version>
                 <configuration>
                     <java>
                         <eclipse>
-                            <version>4.33</version>
-                            <file>${project.basedir}/eclipse-formatter.xml</file>
+                            <version>4.41</version>
                         </eclipse>
                     </java>
                     <!-- Uncomment to format TypeScript files 

@@ -10,9 +10,8 @@
   },
   "features": {
     //Yes it's cool, DON'T DO THIS IN PRODUCTION!
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+    "ghcr.io/devcontainers/features/docker-in-docker:4.1.3": {
 			"version": "latest",
-			"enableNonRootDocker": "true",
 			"moby": "false"
 		}
   },
